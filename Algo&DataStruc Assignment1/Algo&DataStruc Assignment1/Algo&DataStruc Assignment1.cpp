@@ -49,15 +49,60 @@ public:
     /// While current is not null it continues the loop
     /// Print data stored
     /// make current's pointer switch from itself to the next and so on until it points to empty
+    /// 
+    /// Doubles as a display and update just call it again and it will run through the list
     /// </summary>
-    void display() {
+    void display() { 
         Node* current = head;
         while (current != nullptr) {
             cout << current->data << "\n";
             current = current->next;
         }
     }
+
+
 };
+
+
+#pragma region Bubble Sort
+
+// Sorts array by bubble sort method, takes two elements
+void sort(int arr[], int n) {
+    for (int i = 0; i < n - 1; ++i) {
+        // Last i elements are already in place
+        for (int j = 0; j < n - i - 1; ++j) {
+            if (arr[j] > arr[j + 1]) {
+                // Swap arr[j] and arr[j+1]
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+
+    /*
+    Time Complexity 
+    Best case for Bubble sort is if the elements are in order then it would be just O(n)
+    This would come if all elements are in order then the sort wouldnt have a need to swap anything and go over it again.
+
+    Worst case would be if elements were in reverse order, this would lead to a time complexity of O(n^2)
+    This is because the sort would have to swap every single adjacent element multiple times making it O(n^2)
+    
+    */
+}
+
+// Displays Array by running through the length of it.
+void display(int arr[], int size) {
+    for (int i = 0; i < size; ++i)
+        std::cout << arr[i] << " ";
+    std::cout << std::endl;
+}
+
+
+#pragma endregion
+
+
+
 
 int main() {
     
@@ -79,12 +124,17 @@ int main() {
 
     }
 
-
-
-    cout << "\nConsole\n";
-
-
     myList.display();
+
+
+    //Showing sorting function I couldnt get working with the text but know how to use.
+    int arrary[] = { 10,20,1,24,2512,312,4,12,23,51,25,56,5,12,312,33,125,3,14,123,12,31 };
+    int size = sizeof(arrary) / sizeof(arrary[0]); // Gets size of array
+
+    display(arrary,size); // Prints unsorted array
+    sort(arrary,size); // Sorts the array
+    display(arrary,size); // Prints sorted array
+    
 
 
 
