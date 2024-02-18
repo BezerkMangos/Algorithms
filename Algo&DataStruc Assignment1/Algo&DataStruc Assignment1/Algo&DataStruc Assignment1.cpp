@@ -1,129 +1,91 @@
-// Algo&DataStruc Assignment1.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 #include <fstream>
 #include <string>
 
 using namespace std;
 
-
-struct Node {
-    //Information saved in each node
+class Node {
 public:
-    string line;
-    int itemNum;
-    string itemName;
-    string itemName2;
-    double itemPrice;
-    string category;
-    // Pointer to  node
+    string data;
     Node* next;
+
+    Node(string value) {
+        data = value;
+        next = nullptr;
+    }
 };
 
-//Start of linked list class
 class LinkedList {
-private:
-    Node* head; //Head of the list, first element
 public:
-    int index = 0;
-    LinkedList() : head(nullptr) {}
+    Node* head;
 
- 
-    //Insertion Method
-    // Adding nodes to linked list, data required, in this case itmNum, 
-    void insert(int Num,string itemName,string itemName2 ,double price, string cate) {
-        Node* newNode = new Node; // Creates a new node
-        newNode->itemNum = Num; // Sets node's data to parameter data
-        newNode->itemName = itemName;
-        newNode->itemName2 = itemName2;
-        newNode->itemPrice = price;
-        newNode->category = cate;
-       
-        newNode->next = head; 
-        head = newNode;// makes head point to new node and not null
+    LinkedList() {
+        head = nullptr;
     }
 
-    void insert(string newLine) {
-        Node* newNode = new Node;
-        newNode->line = newLine;
 
-        newNode->next = head;
-    }
-
-    
-
-    //Dipslay Entire liked list by check to see if the pointer returns null, if it does there is no next, starts at tail works back to head
-    void display() {
-        Node* current = head; // Makes a node pointer to the head of the list
-        index = 0;
-        while (current != nullptr) {
-            cout << index << ": ";
-            cout << current->line;
-            cout << current->itemNum; // Prints out the current data
-            cout << current->itemName; 
-            cout << current->itemName2; 
-            cout << current->itemPrice; 
-            cout << current->category; 
-            current = current->next; // Moves current to the data of the next pointer,
-            cout << "\n";
-            index = index + 1;
+    /// <summary>
+    /// Append function for linked list
+    /// Takes in a string value, in our case information about product
+    /// if the current head is pointing to a nullpointer it makes a new node with the data we enter and make that head nullpointer
+    /// </summary>
+    /// <param name="value"></param>
+    void append(string value) {
+        if (head == nullptr) {
+            head = new Node(value);
+            return;
         }
-        
-    }
-    
-    void DeleteNode() {
 
+        Node* current = head;
+        while (current->next != nullptr) {
+            current = current->next;
+        }
+        current->next = new Node(value);
     }
 
+    /// <summary>
+    /// Method to display the entire linked list
+    /// Current stores the memordy address of the head
+    /// While current is not null it continues the loop
+    /// Print data stored
+    /// make current's pointer switch from itself to the next and so on until it points to empty
+    /// </summary>
+    void display() {
+        Node* current = head;
+        while (current != nullptr) {
+            cout << current->data << "\n";
+            current = current->next;
+        }
+    }
 };
-//End of Linked list Class
 
-
-
-
-int main()
-{
-
+int main() {
+    
+    
     // Create a linked list object
     LinkedList myList;
+    ifstream fileName("Info.txt"); // Sets file name
+    string currLine; // Hold string of data for linked list,
 
-    LinkedList itemNum;
-    LinkedList itemName;
-    LinkedList price;
-    LinkedList category;
 
-    int tempItemNum;
-    string tempItemName;
-    string tempItemName2;
-    int tempPrice;
-    string tempCategory;
 
-	ifstream fileName("Info.txt"); // Sets file name
-	string currLine; // Hold string of data for linked list,
-
-    
-    
     //Reads from file
     if (fileName.is_open()) {
         for (int i = 0; getline(fileName, currLine); i++) {
             currLine.erase(std::remove(currLine.begin(), currLine.end(), ','), currLine.end()); // removes commas
-            cout << currLine << "\n";
-            myList.insert(currLine);
+            //cout << currLine << "\n";
+            myList.append(currLine);
         }
 
     }
-    
- 
+
+
 
     cout << "\nConsole\n";
-    myList.display();
-	
-    
-    
 
+
+    myList.display();
 
 
 
 }
-
