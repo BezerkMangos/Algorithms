@@ -1,0 +1,4 @@
+﻿  Algo&DataStruc Assignment1.cpp
+C:\Users\satta\source\repos\Algo&DataStruc Assignment1\Algo&DataStruc Assignment1\Algo&DataStruc Assignment1.cpp(99,9): warning C4101: 'tempPrice': unreferenced local variable
+C:\Users\satta\source\repos\Algo&DataStruc Assignment1\Algo&DataStruc Assignment1\Algo&DataStruc Assignment1.cpp(96,9): warning C4101: 'tempItemNum': unreferenced local variable
+  Algo&DataStruc Assignment1.vcxproj -> C:\Users\satta\source\repos\Algo&DataStruc Assignment1\x64\Debug\Algo&DataStruc Assignment1.exe
